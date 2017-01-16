@@ -1,4 +1,4 @@
-# statusResource
+# staticResource
 
 一个利用Spring Boot访问静态资源的程序。
 
