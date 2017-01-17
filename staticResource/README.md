@@ -27,7 +27,13 @@
 
 * **注解**
 
-  本项目在`main`方法的类上用了 `@SpringBootApplication` 注解。使用这个注解与同时使用 `@Configuration` ， `@EnableAutoConfiguration` 和 `@ComponentScan` 三个注解的效果相同。
+  * 本项目在`main`方法的类上用了 `@SpringBootApplication` 注解。使用这个注解与同时使用 `@Configuration` ， `@EnableAutoConfiguration` 和 `@ComponentScan` 三个注解的效果相同。
+
+* **关于 `@Controller` 和 `@RestController`** 
+
+  在Spring Boot中，一个Controller类若被 `@Controller` 修饰，则其中所有方法的返回值都会被视为资源路径，即要返回 `*.html/*.ftl` 类似的数据。
+
+  若一个类被 `@RestController` 修饰，则其中所有方法的返回值都会被视为数据（如Json），直接返回，不会寻找对应的静态资源。
 
 ## 3. 运行方法
 
