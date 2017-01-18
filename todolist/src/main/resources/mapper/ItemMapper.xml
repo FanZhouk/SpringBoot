@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- 指定工作空间，要与接口名相同，源代码没有去看，猜测应该是通过"这里的namespace.下边方法的id"来定位方法的 -->
+<mapper namespace="com.fzk.mapper.ItemMapper">
+
+	<!-- 插入一个事项 -->
+	<!-- 若不需要自动返回主键，将useGeneratedKeys="true" keyProperty="id"去掉即可(当然如果不需要自动返回主键，直接用注解即可) -->
+	<!-- <insert id="insert" parameterType="Item" useGeneratedKeys="true" keyProperty="id">
+		<![CDATA[
+			INSERT INTO item(id,content,createtime,finishtime,finishflag,deleteflag)
+			VALUES (#{id},#{content},#{createtime},#{finishtime},#{finishflag},#{deleteflag})
+		]]>
+	</insert> -->
+	
+	<!-- 根据条件查询事项列表 -->
+	<select id="findList" resultType="Item">
+		SELECT * FROM item
+		where 1=1
+		<if test="finishflag!=null">and finishflag = #{finishflag}</if>
+		<if test="deleteflag!=null">and deleteflag = #{deleteflag}</if>
+		ORDER BY lastmodifytime DESC
+	</select>
+
+	<!-- 更新记录，只要传入不为null则更新，若传入空字符串同样会更新 -->
+	<update id="update">
+		UPDATE item SET
+		<if test="content!=null">content = #{content}</if>
+		<if test="createtime!=null">createtime = #{createtime}</if>
+		<if test="lastmodifytime!=null">lastmodifytime = #{lastmodifytime}</if>
+		<if test="finishtime!=null">finishtime = #{finishtime}</if>
+		<if test="finishflag!=null">finishflag = #{finishflag}</if>
+		<if test="deleteflag!=null">deleteflag = #{deleteflag}</if>
+		WHERE id=#{id}
+	</update>
+</mapper>
